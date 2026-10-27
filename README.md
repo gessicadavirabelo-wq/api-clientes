@@ -74,6 +74,27 @@ Corpo da requisição:
 1. Abra o projeto na sua IDE.
 2. Execute a classe `ApiClientesApplication`.
 
+## Documentação da API — Swagger
+
+A API possui documentação interativa com Swagger UI, permitindo visualizar e testar os endpoints diretamente pelo navegador.
+
+Com a aplicação em execução, acesse:
+
+http://localhost:8080/swagger-ui/index.html
+
+A documentação permite testar as operações de cadastro, consulta, atualização e exclusão de clientes.
+
+### Principais endpoints
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/clientes` | Cadastrar cliente |
+| GET | `/clientes` | Listar clientes |
+| GET | `/clientes/{id}` | Buscar cliente por ID |
+| PUT | `/clientes/{id}` | Atualizar cliente |
+| DELETE | `/clientes/{id}` | Excluir cliente |
+
+
 ### Executando os testes
 
 No terminal, na pasta principal do projeto, execute:
