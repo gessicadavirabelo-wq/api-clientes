@@ -29,18 +29,19 @@ public class ClienteService {
                 .orElseThrow(() -> new NoSuchElementException("Cliente não encontrado"));
     }
 
+
     public Cliente atualizar(Long id, Cliente dadosAtualizados) {
-        Cliente cliente = clienteRepository.findById(id).orElse(null);
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new NoSuchElementException("Cliente não encontrado com ID: " + id));
 
-        if (cliente != null) {
-            cliente.setNome(dadosAtualizados.getNome());
-            cliente.setEmail(dadosAtualizados.getEmail());
-            cliente.setTelefone(dadosAtualizados.getTelefone());
+        cliente.setNome(dadosAtualizados.getNome());
+        cliente.setEmail(dadosAtualizados.getEmail());
+        cliente.setTelefone(dadosAtualizados.getTelefone());
 
-            return clienteRepository.save(cliente);
-        }
-        return null;
+        return clienteRepository.save(cliente);
     }
+
 
     public void excluir(Long id) {
         clienteRepository.deleteById(id);

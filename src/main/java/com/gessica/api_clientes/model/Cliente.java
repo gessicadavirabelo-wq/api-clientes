@@ -17,6 +17,7 @@ public class Cliente {
     @NotBlank(message = "O nome do cliente é obrigatório")
     private String nome;
 
+    @NotBlank(message = "O e-mail é obrigatório")
     @Email(message = "Informe um e-mail válido")
     private String email;
 
