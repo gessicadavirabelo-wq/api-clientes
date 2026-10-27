@@ -6,7 +6,7 @@ Este projeto faz parte do meu portfólio de estudos em desenvolvimento Back-end 
 
 ## Tecnologias utilizadas
 
-- Java 24
+- Java 21
 - Spring Boot
 - Spring Data JPA
 - MySQL
@@ -37,13 +37,11 @@ Este projeto faz parte do meu portfólio de estudos em desenvolvimento Back-end 
 
 ## Exemplo de cadastro
 
-Requisição: `POST /clientes`
+**Requisição:** `POST /clientes`
 
-Cabeçalho:
+**Cabeçalho:** `Content-Type: application/json`
 
-`Content-Type: application/json`
-
-Corpo da requisição:
+**Corpo da requisição:**
 
 ```json
 {
@@ -53,26 +51,33 @@ Corpo da requisição:
 }
 ```
 
-## Como executar o projeto
+## Pré-requisitos
 
-### Pré-requisitos
-
-- Java 24
+- Java 21
 - MySQL
 - Git (opcional, para clonar o repositório)
 
-### Configuração do banco de dados
+## Como executar o projeto
 
-1. Crie um banco de dados chamado `api_clientes`.
-2. Configure as credenciais de acesso ao MySQL no arquivo local `src/main/resources/application-local.properties`.
-3. Confira se o serviço do MySQL está em execução.
+1. Clone este repositório.
+2. Crie o banco de dados `api_clientes` no MySQL.
+3. Configure as credenciais de acesso ao banco no arquivo local `src/main/resources/application-local.properties`.
+4. Confira se o serviço do MySQL está em execução.
+5. Abra o terminal na pasta raiz do projeto e execute:
 
-**Importante:** o arquivo `application-local.properties` contém configurações locais e não deve ser publicado no GitHub. Não compartilhe senhas ou outras credenciais.
+```powershell
+.\mvnw.cmd spring-boot:run
+```
 
-### Executando a aplicação
+A aplicação será iniciada na porta `8080`.
 
-1. Abra o projeto na sua IDE.
-2. Execute a classe `ApiClientesApplication`.
+Como alternativa, abra o projeto no IntelliJ IDEA e execute a classe `ApiClientesApplication`.
+
+## Configuração do banco de dados
+
+O arquivo `application-local.properties` contém configurações locais e não deve ser publicado no GitHub.
+
+Não compartilhe senhas ou outras credenciais. Confira se esse arquivo está listado no `.gitignore`.
 
 ## Documentação da API — Swagger
 
@@ -84,22 +89,11 @@ http://localhost:8080/swagger-ui/index.html
 
 A documentação permite testar as operações de cadastro, consulta, atualização e exclusão de clientes.
 
-### Principais endpoints
+## Executando os testes
 
-| Método | Endpoint | Descrição |
-|---|---|---|
-| POST | `/clientes` | Cadastrar cliente |
-| GET | `/clientes` | Listar clientes |
-| GET | `/clientes/{id}` | Buscar cliente por ID |
-| PUT | `/clientes/{id}` | Atualizar cliente |
-| DELETE | `/clientes/{id}` | Excluir cliente |
+No terminal, na pasta raiz do projeto, execute:
 
-
-### Executando os testes
-
-No terminal, na pasta principal do projeto, execute:
-
-```bash
+```powershell
 .\mvnw.cmd clean test
 ```
 

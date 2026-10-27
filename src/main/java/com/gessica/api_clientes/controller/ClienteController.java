@@ -49,7 +49,7 @@ public class ClienteController {
     @PutMapping("/clientes/{id}")
     public Cliente atualizar(
             @PathVariable Long id,
-            @RequestBody Cliente cliente) {
+            @Valid @RequestBody Cliente cliente) {
         return clienteService.atualizar(id, cliente);
     }
 
