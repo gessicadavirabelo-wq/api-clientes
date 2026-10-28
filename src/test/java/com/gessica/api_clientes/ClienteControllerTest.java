@@ -7,11 +7,13 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.test.web.servlet.MvcResult;
@@ -152,12 +154,12 @@ class ClienteControllerTest {
         String resposta = mockMvc.perform(post("/clientes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                            {
-                                "nome": "Maria",
-                                "email": "maria@teste.com",
-                                "telefone": "34999999999"
-                            }
-                            """))
+                                {
+                                    "nome": "Maria",
+                                    "email": "maria@teste.com",
+                                    "telefone": "34999999999"
+                                }
+                                """))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -179,15 +181,36 @@ class ClienteControllerTest {
         mockMvc.perform(put("/clientes/999999")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                            {
-                                "nome": "Maria",
-                                "email": "maria@teste.com",
-                                "telefone": "34999999999"
-                            }
-                            """))
+                                {
+                                    "nome": "Maria",
+                                    "email": "maria@teste.com",
+                                    "telefone": "34999999999"
+                                }
+                                """))
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    void deveRetornar404AoBuscarClienteInexistente() throws Exception {
+        mockMvc.perform(get("/clientes/999999"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void deveRejeitarClienteComTelefoneInvalido() throws Exception {
+        String clienteJson = """
+                {
+                    "nome": "Cliente Teste",
+                    "email": "cliente.teste@example.com",
+                    "telefone": "123"
+                }
+                """;
+
+        mockMvc.perform(post("/clientes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(clienteJson))
+                .andExpect(status().isBadRequest());
+    }
 
 }
 
