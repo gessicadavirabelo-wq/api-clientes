@@ -211,6 +211,13 @@ class ClienteControllerTest {
                         .content(clienteJson))
                 .andExpect(status().isBadRequest());
     }
+    @Test
+    void deveRetornar404AoExcluirClienteInexistente() throws Exception {
+        mockMvc.perform(
+                        org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                                .delete("/clientes/999999"))
+                .andExpect(status().isNotFound());
+    }
 
 }
 

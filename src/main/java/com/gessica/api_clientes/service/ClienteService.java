@@ -41,9 +41,13 @@ public class ClienteService {
 
         return clienteRepository.save(cliente);
     }
-
-
     public void excluir(Long id) {
-        clienteRepository.deleteById(id);
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new NoSuchElementException(
+                                "Cliente não encontrado com ID: " + id));
+
+        clienteRepository.delete(cliente);
     }
+
 }
